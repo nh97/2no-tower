@@ -228,8 +228,6 @@ func _make_label(text: String, font_size: int) -> Label:
 	l.text = text
 	l.add_theme_font_size_override("font_size", font_size)
 	l.add_theme_color_override("font_color", Color(1, 1, 1))
-	l.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	l.add_theme_constant_override("outline_size", 4)
 	return l
 
 func _make_tower_button(kind: int) -> Button:
