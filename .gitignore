@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+.import/
+
+# Build output
+build/
+
+# Editor credentials (never commit)
+export_presets.cfg.credentials
+
+# macOS
+.DS_Store
