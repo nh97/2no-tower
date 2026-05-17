@@ -64,6 +64,7 @@ func _build_environment() -> void:
 	sky.sky_material = sky_mat
 	e.sky = sky
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	e.ambient_light_energy = 0.6
 	e.fog_enabled = true
 	e.fog_density = 0.005
 	e.fog_light_color = Color(0.75, 0.82, 0.95)
@@ -71,9 +72,9 @@ func _build_environment() -> void:
 	add_child(env)
 
 	var sun := DirectionalLight3D.new()
-	sun.rotation = Vector3(deg_to_rad(-55), deg_to_rad(35), 0)
-	sun.light_energy = 1.1
-	sun.shadow_enabled = true
+	sun.rotation = Vector3(deg_to_rad(-75), deg_to_rad(35), 0)
+	sun.light_energy = 0.6
+	sun.shadow_enabled = false
 	add_child(sun)
 
 func _build_camera() -> void:
