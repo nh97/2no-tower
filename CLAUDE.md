@@ -23,7 +23,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **書き出し**: `godot --headless --export-release "Web" build/web/index.html`
   - 前提: Godot Editor で 4.6.2 stable の Web エクスポートテンプレートをインストール済 (Editor → Manage Export Templates)
 - **ローカル試遊**: `cd build/web && python3 -m http.server 8000` → `http://localhost:8000/`
-- **GitHub Pages デプロイ**: `main` ブランチに push すると `.github/workflows/deploy.yml` が自動でビルド+デプロイ。公開URL: `https://nh97.github.io/claude_3dcg_test/`
+- **GitHub Pages デプロイ**: `main` ブランチに push すると `.github/workflows/deploy.yml` が自動でビルド+デプロイ。公開URL: `https://nh97.github.io/2no-tower/`
 - **設定**: スレッド OFF (`variant/thread_support=false`) で SharedArrayBuffer 不要、静的ホスティングで動作
 
 ## ディレクトリ構成
