@@ -28,7 +28,7 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/default_font="res://fonts/NotoSansJP-Regular.ttf"
+theme/custom_font="res://fonts/NotoSansJP-Regular.ttf"
 
 [rendering]
 
