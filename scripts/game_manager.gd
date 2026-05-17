@@ -7,9 +7,9 @@ const TOTAL_WAVES := 5
 const DEFAULT_TOWER_KIND := 0  # = Tower.Kind.MAGIC
 
 const DIFFICULTY_CONFIG := {
-	Difficulty.EASY:   { "money": 150, "lives": 20, "hp_mult": 0.8, "label": "🌱 EASY" },
-	Difficulty.NORMAL: { "money": 100, "lives": 10, "hp_mult": 1.0, "label": "⚔ NORMAL" },
-	Difficulty.HARD:   { "money": 80,  "lives": 7,  "hp_mult": 1.2, "label": "🔥 HARD" },
+	Difficulty.EASY:   { "money": 150, "lives": 20, "hp_mult": 0.8, "label": "EASY" },
+	Difficulty.NORMAL: { "money": 100, "lives": 10, "hp_mult": 1.0, "label": "NORMAL" },
+	Difficulty.HARD:   { "money": 80,  "lives": 7,  "hp_mult": 1.2, "label": "HARD" },
 }
 
 var money: int = 0

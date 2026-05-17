@@ -115,7 +115,7 @@ func _build_boss_bar(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 4)
 	_boss_container.add_child(vbox)
 
-	_boss_label = _make_label("👹 BOSS  0 / 0", 18)
+	_boss_label = _make_label("BOSS  0 / 0", 18)
 	_boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(_boss_label)
 
@@ -217,7 +217,7 @@ func _build_difficulty_popup(parent: Control) -> void:
 	for d in GameManager.Difficulty.values():
 		var cfg: Dictionary = GameManager.DIFFICULTY_CONFIG[d]
 		var btn := Button.new()
-		btn.text = "%s\n💰%d ❤%d\n敵HP×%.1f" % [cfg.label, cfg.money, cfg.lives, cfg.hp_mult]
+		btn.text = "%s\nG %d  Life %d\n敵HP×%.1f" % [cfg.label, cfg.money, cfg.lives, cfg.hp_mult]
 		btn.custom_minimum_size = Vector2(170, 110)
 		btn.add_theme_font_size_override("font_size", 18)
 		btn.pressed.connect(func() -> void: GameManager.start_game(d))
@@ -242,13 +242,13 @@ func _make_tower_button(kind: int) -> Button:
 	return btn
 
 func _on_money_changed(value: int) -> void:
-	_money_label.text = "💰 %d" % value
+	_money_label.text = "G: %d" % value
 
 func _on_lives_changed(value: int) -> void:
-	_lives_label.text = "❤ %d" % value
+	_lives_label.text = "Life: %d" % value
 
 func _on_wave_changed(value: int) -> void:
-	_wave_label.text = "🌊 %d / %d" % [value, GameManager.TOTAL_WAVES]
+	_wave_label.text = "Wave: %d / %d" % [value, GameManager.TOTAL_WAVES]
 
 func _on_state_changed(new_state: int) -> void:
 	_difficulty_container.visible = (new_state == GameManager.State.SELECTING_DIFFICULTY)
@@ -300,12 +300,12 @@ func _on_sell_request_changed(slot: PlacementSlot, refund: int) -> void:
 func _on_boss_appeared(max_hp: int) -> void:
 	_boss_bar.max_value = max_hp
 	_boss_bar.value = max_hp
-	_boss_label.text = "👹 BOSS  %d / %d" % [max_hp, max_hp]
+	_boss_label.text = "BOSS  %d / %d" % [max_hp, max_hp]
 	_boss_container.visible = true
 
 func _on_boss_hp_changed(hp: int, max_hp: int) -> void:
 	_boss_bar.value = hp
-	_boss_label.text = "👹 BOSS  %d / %d" % [hp, max_hp]
+	_boss_label.text = "BOSS  %d / %d" % [hp, max_hp]
 
 func _on_boss_defeated() -> void:
 	_boss_container.visible = false
