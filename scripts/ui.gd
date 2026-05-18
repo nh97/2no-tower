@@ -2,7 +2,6 @@ extends CanvasLayer
 
 var _money_label: Label
 var _lives_label: Label
-var _wave_label: Label
 var _message_label: Label
 var _message_subtitle: Label
 var _message_container: CenterContainer
@@ -20,7 +19,6 @@ func _ready() -> void:
 	_build_hud()
 	GameManager.money_changed.connect(_on_money_changed)
 	GameManager.lives_changed.connect(_on_lives_changed)
-	GameManager.wave_changed.connect(_on_wave_changed)
 	GameManager.state_changed.connect(_on_state_changed)
 	GameManager.selected_tower_changed.connect(_on_selected_tower_changed)
 	GameManager.sell_request_changed.connect(_on_sell_request_changed)
@@ -30,7 +28,6 @@ func _ready() -> void:
 	GameManager.game_speed_changed.connect(_on_game_speed_changed)
 	_on_money_changed(GameManager.money)
 	_on_lives_changed(GameManager.lives)
-	_on_wave_changed(GameManager.wave)
 	_on_state_changed(GameManager.state)
 	_on_selected_tower_changed(GameManager.selected_tower_kind)
 	_on_game_speed_changed(GameManager.game_speed)
@@ -55,10 +52,8 @@ func _build_hud() -> void:
 
 	_money_label = _make_label("Money: 0", 24)
 	_lives_label = _make_label("Lives: 0", 24)
-	_wave_label = _make_label("Wave: 0", 24)
 	top_bar.add_child(_money_label)
 	top_bar.add_child(_lives_label)
-	top_bar.add_child(_wave_label)
 
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -276,10 +271,7 @@ func _on_money_changed(value: int) -> void:
 	_money_label.text = "💰 %d" % value
 
 func _on_lives_changed(value: int) -> void:
-	_lives_label.text = "❤ %d" % value
-
-func _on_wave_changed(value: int) -> void:
-	_wave_label.text = "🌊 %d / %d" % [value, GameManager.TOTAL_WAVES]
+	_lives_label.text = "❤ %d / %d" % [value, GameManager.starting_lives]
 
 func _on_state_changed(new_state: int) -> void:
 	_difficulty_container.visible = (new_state == GameManager.State.SELECTING_DIFFICULTY)

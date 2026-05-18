@@ -23,7 +23,7 @@ var current_boss: Enemy = null
 var current_difficulty: int = Difficulty.NORMAL
 var enemy_hp_mult: float = 1.0
 var game_speed: float = 1.0
-var _starting_lives: int = 0
+var starting_lives: int = 0
 
 signal money_changed(value: int)
 signal lives_changed(value: int)
@@ -44,7 +44,7 @@ func reset() -> void:
 	pending_sell_slot = null
 	current_boss = null
 	enemy_hp_mult = 1.0
-	_starting_lives = 0
+	starting_lives = 0
 	set_game_speed(1.0)
 	_set_state(State.SELECTING_DIFFICULTY)
 	money_changed.emit(money)
@@ -60,7 +60,7 @@ func start_game(difficulty: int) -> void:
 	money = cfg.money
 	lives = cfg.lives
 	enemy_hp_mult = cfg.hp_mult
-	_starting_lives = cfg.lives
+	starting_lives = cfg.lives
 	money_changed.emit(money)
 	lives_changed.emit(lives)
 	_set_state(State.READY)
@@ -139,7 +139,7 @@ func cycle_game_speed() -> void:
 	set_game_speed(SPEED_OPTIONS[next_idx])
 
 func is_perfect_clear() -> bool:
-	return _starting_lives > 0 and lives == _starting_lives
+	return starting_lives > 0 and lives == starting_lives
 
 func _set_state(new_state: State) -> void:
 	state = new_state
