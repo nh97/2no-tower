@@ -209,6 +209,13 @@ func _build_difficulty_popup(parent: Control) -> void:
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
+	var help_text := "【操作方法】\n" + \
+		"・下部の塔ボタンを選択 → 黄色いマスをタップで配置\n" + \
+		"・設置済みの塔をタップ → 売却 (50% 返金)"
+	var help := _make_label(help_text, 16)
+	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(help)
+
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	hbox.add_theme_constant_override("separation", 16)
