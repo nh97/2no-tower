@@ -205,20 +205,27 @@ func _build_difficulty_popup(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 18)
 	panel.add_child(vbox)
 
-	var title := _make_label("難易度を選択", 28)
+	var title := _make_label("2no-tower", 36)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
-	var help_text := "【操作方法】\n" + \
+	var ops_text := "【操作方法】\n" + \
 		"・下部のボタンでオブジェクトを選択 → 黄色いマスをタップで配置\n" + \
-		"・設置済みのオブジェクトをタップ → 売却 (50% 返金)\n" + \
-		"\n" + \
-		"【G (お金) について】\n" + \
+		"・設置済みのオブジェクトをタップ → 売却 (50% 返金)"
+	var ops := _make_label(ops_text, 16)
+	ops.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(ops)
+
+	var g_text := "【G (お金) について】\n" + \
 		"・画面上部に所有 G を表示\n" + \
 		"・オブジェクトを配置すると G を消費、敵を倒すと G を獲得"
-	var help := _make_label(help_text, 16)
-	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(help)
+	var g_label := _make_label(g_text, 16)
+	g_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(g_label)
+
+	var difficulty_label := _make_label("難易度を選択", 22)
+	difficulty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(difficulty_label)
 
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
