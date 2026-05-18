@@ -209,27 +209,13 @@ func _build_difficulty_popup(parent: Control) -> void:
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
-	var ops_text := "【操作方法】\n" + \
-		"・下部のボタンでオブジェクトを選択 → 黄色いマスをタップで配置\n" + \
-		"・設置済みのオブジェクトをタップ → 売却 (50% 返金)"
-	var ops := _make_label(ops_text, 16)
-	ops.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(ops)
-
-	var g_text := "【G (お金) について】\n" + \
-		"・画面上部に所有 G を表示\n" + \
-		"・オブジェクトを配置すると G を消費、敵を倒すと G を獲得"
-	var g_label := _make_label(g_text, 16)
-	g_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(g_label)
-
-	var life_text := "【Life について】\n" + \
-		"・画面上部に残り Life を表示\n" + \
-		"・敵がゴールに到達すると Life が 1 減る\n" + \
-		"・Life が 0 になるとゲームオーバー"
-	var life_label := _make_label(life_text, 16)
-	life_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(life_label)
+	var help_text := "【遊び方】\n" + \
+		"・下部のボタン→黄色いマスをタップでオブジェクト配置 (G を消費)\n" + \
+		"・設置済みオブジェクトをタップで売却 (50% 返金)\n" + \
+		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)"
+	var help := _make_label(help_text, 16)
+	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(help)
 
 	var difficulty_label := _make_label("難易度を選択", 22)
 	difficulty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
