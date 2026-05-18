@@ -130,7 +130,7 @@ func _build_boss_bar(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 4)
 	_boss_container.add_child(vbox)
 
-	_boss_label = _make_label("👹 BOSS  0 / 0", 18)
+	_boss_label = _make_label("🐉 BOSS  0 / 0", 18)
 	_boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(_boss_label)
 
@@ -326,12 +326,12 @@ func _on_sell_request_changed(slot: PlacementSlot, refund: int) -> void:
 func _on_boss_appeared(max_hp: int) -> void:
 	_boss_bar.max_value = max_hp
 	_boss_bar.value = max_hp
-	_boss_label.text = "👹 BOSS  %d / %d" % [max_hp, max_hp]
+	_boss_label.text = "🐉 BOSS  %d / %d" % [max_hp, max_hp]
 	_boss_container.visible = true
 
 func _on_boss_hp_changed(hp: int, max_hp: int) -> void:
 	_boss_bar.value = hp
-	_boss_label.text = "👹 BOSS  %d / %d" % [hp, max_hp]
+	_boss_label.text = "🐉 BOSS  %d / %d" % [hp, max_hp]
 
 func _on_boss_defeated() -> void:
 	_boss_container.visible = false

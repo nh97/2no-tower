@@ -20,7 +20,7 @@ const CONFIG := {
 		"orb_color": Color(0.75, 0.45, 1.0),
 		"base_color": Color(0.5, 0.5, 0.55),
 		"orb_radius": 0.35,
-		"label": "🪄 魔法",
+		"label": "🔮 魔法",
 		"model_path": "res://models/Gem_Pink.gltf",
 		"model_scale": 1.3,
 		"model_y_offset": 1.5,
