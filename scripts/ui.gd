@@ -157,7 +157,7 @@ func _build_sell_popup(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 14)
 	panel.add_child(vbox)
 
-	var title := _make_label("塔を売却しますか?", 22)
+	var title := _make_label("オブジェクトを売却しますか?", 22)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
@@ -210,8 +210,12 @@ func _build_difficulty_popup(parent: Control) -> void:
 	vbox.add_child(title)
 
 	var help_text := "【操作方法】\n" + \
-		"・下部の塔ボタンを選択 → 黄色いマスをタップで配置\n" + \
-		"・設置済みの塔をタップ → 売却 (50% 返金)"
+		"・下部のボタンでオブジェクトを選択 → 黄色いマスをタップで配置\n" + \
+		"・設置済みのオブジェクトをタップ → 売却 (50% 返金)\n" + \
+		"\n" + \
+		"【G (お金) について】\n" + \
+		"・画面上部に所有 G を表示\n" + \
+		"・オブジェクトを配置すると G を消費、敵を倒すと G を獲得"
 	var help := _make_label(help_text, 16)
 	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(help)
