@@ -66,8 +66,8 @@ func _build_hud() -> void:
 	top_bar.add_child(spacer)
 
 	_speed_button = Button.new()
-	_speed_button.text = "速度: x1.0"
-	_speed_button.custom_minimum_size = Vector2(120, 40)
+	_speed_button.text = "▶▷▷ x1.0"
+	_speed_button.custom_minimum_size = Vector2(140, 40)
 	_speed_button.add_theme_font_size_override("font_size", 18)
 	_speed_button.pressed.connect(func() -> void: GameManager.cycle_game_speed())
 	top_bar.add_child(_speed_button)
@@ -233,8 +233,7 @@ func _build_difficulty_popup(parent: Control) -> void:
 	var help_text := "【遊び方】\n" + \
 		"・下部のボタン→黄色いマスをタップでオブジェクト配置 (G を消費)\n" + \
 		"・設置済みオブジェクトをタップで売却 (50% 返金)\n" + \
-		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)\n" + \
-		"・右上ボタンで速度切替 (x1.0 / x1.5 / x2.0)"
+		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)"
 	var help := _make_label(help_text, 16)
 	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(help)
@@ -361,4 +360,10 @@ func _on_boss_defeated() -> void:
 	_boss_container.visible = false
 
 func _on_game_speed_changed(value: float) -> void:
-	_speed_button.text = "速度: x%.1f" % value
+	var idx: int = GameManager.SPEED_OPTIONS.find(value)
+	if idx < 0:
+		idx = 0
+	var icon: String = ""
+	for i in GameManager.SPEED_OPTIONS.size():
+		icon += "▶" if i <= idx else "▷"
+	_speed_button.text = "%s x%.1f" % [icon, value]
