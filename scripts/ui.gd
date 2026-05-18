@@ -13,6 +13,7 @@ var _boss_label: Label
 var _sell_container: CenterContainer
 var _sell_confirm_btn: Button
 var _difficulty_container: CenterContainer
+var _speed_button: Button
 
 func _ready() -> void:
 	_build_hud()
@@ -25,11 +26,13 @@ func _ready() -> void:
 	GameManager.boss_appeared.connect(_on_boss_appeared)
 	GameManager.boss_hp_changed.connect(_on_boss_hp_changed)
 	GameManager.boss_defeated.connect(_on_boss_defeated)
+	GameManager.game_speed_changed.connect(_on_game_speed_changed)
 	_on_money_changed(GameManager.money)
 	_on_lives_changed(GameManager.lives)
 	_on_wave_changed(GameManager.wave)
 	_on_state_changed(GameManager.state)
 	_on_selected_tower_changed(GameManager.selected_tower_kind)
+	_on_game_speed_changed(GameManager.game_speed)
 
 func _build_hud() -> void:
 	var hud := Control.new()
@@ -55,6 +58,18 @@ func _build_hud() -> void:
 	top_bar.add_child(_money_label)
 	top_bar.add_child(_lives_label)
 	top_bar.add_child(_wave_label)
+
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	top_bar.add_child(spacer)
+
+	_speed_button = Button.new()
+	_speed_button.text = "速度: x1.0"
+	_speed_button.custom_minimum_size = Vector2(120, 40)
+	_speed_button.add_theme_font_size_override("font_size", 18)
+	_speed_button.pressed.connect(func() -> void: GameManager.cycle_game_speed())
+	top_bar.add_child(_speed_button)
 
 	# Bottom bar: tower selection
 	var bottom_bar := HBoxContainer.new()
@@ -212,7 +227,8 @@ func _build_difficulty_popup(parent: Control) -> void:
 	var help_text := "【遊び方】\n" + \
 		"・下部のボタン→黄色いマスをタップでオブジェクト配置 (G を消費)\n" + \
 		"・設置済みオブジェクトをタップで売却 (50% 返金)\n" + \
-		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)"
+		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)\n" + \
+		"・右上ボタンで速度切替 (x1.0 / x1.5 / x2.0)"
 	var help := _make_label(help_text, 16)
 	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(help)
@@ -319,3 +335,6 @@ func _on_boss_hp_changed(hp: int, max_hp: int) -> void:
 
 func _on_boss_defeated() -> void:
 	_boss_container.visible = false
+
+func _on_game_speed_changed(value: float) -> void:
+	_speed_button.text = "速度: x%.1f" % value

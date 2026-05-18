@@ -5,6 +5,7 @@ enum Difficulty { EASY, NORMAL, HARD }
 
 const TOTAL_WAVES := 5
 const DEFAULT_TOWER_KIND := 0  # = Tower.Kind.MAGIC
+const SPEED_OPTIONS: Array[float] = [1.0, 1.5, 2.0]
 
 const DIFFICULTY_CONFIG := {
 	Difficulty.EASY:   { "money": 150, "lives": 20, "hp_mult": 0.8, "label": "EASY" },
@@ -21,6 +22,7 @@ var pending_sell_slot: PlacementSlot = null
 var current_boss: Enemy = null
 var current_difficulty: int = Difficulty.NORMAL
 var enemy_hp_mult: float = 1.0
+var game_speed: float = 1.0
 
 signal money_changed(value: int)
 signal lives_changed(value: int)
@@ -31,6 +33,7 @@ signal sell_request_changed(slot: PlacementSlot, refund: int)
 signal boss_appeared(max_hp: int)
 signal boss_hp_changed(hp: int, max_hp: int)
 signal boss_defeated()
+signal game_speed_changed(value: float)
 
 func reset() -> void:
 	money = 0
@@ -40,6 +43,7 @@ func reset() -> void:
 	pending_sell_slot = null
 	current_boss = null
 	enemy_hp_mult = 1.0
+	set_game_speed(1.0)
 	_set_state(State.SELECTING_DIFFICULTY)
 	money_changed.emit(money)
 	lives_changed.emit(lives)
@@ -120,6 +124,16 @@ func notify_boss_hp(hp: int, max_hp: int) -> void:
 func clear_boss() -> void:
 	current_boss = null
 	boss_defeated.emit()
+
+func set_game_speed(s: float) -> void:
+	game_speed = s
+	Engine.time_scale = s
+	game_speed_changed.emit(s)
+
+func cycle_game_speed() -> void:
+	var idx: int = SPEED_OPTIONS.find(game_speed)
+	var next_idx: int = (idx + 1) % SPEED_OPTIONS.size() if idx >= 0 else 0
+	set_game_speed(SPEED_OPTIONS[next_idx])
 
 func _set_state(new_state: State) -> void:
 	state = new_state
