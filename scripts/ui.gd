@@ -4,6 +4,7 @@ var _money_label: Label
 var _lives_label: Label
 var _wave_label: Label
 var _message_label: Label
+var _message_subtitle: Label
 var _message_container: CenterContainer
 var _restart_button: Button
 var _tower_buttons: Array[Button] = []
@@ -103,6 +104,11 @@ func _build_hud() -> void:
 	_message_label = _make_label("", 72)
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	msg_box.add_child(_message_label)
+
+	_message_subtitle = _make_label("", 28)
+	_message_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_message_subtitle.visible = false
+	msg_box.add_child(_message_subtitle)
 
 	_restart_button = Button.new()
 	_restart_button.text = "リスタート"
@@ -282,7 +288,11 @@ func _on_state_changed(new_state: int) -> void:
 		GameManager.State.GAME_OVER:
 			_show_message("GAME OVER", Color(1, 0.4, 0.4))
 		GameManager.State.VICTORY:
-			_show_message("VICTORY!", Color(0.9, 0.9, 0.4))
+			if GameManager.is_perfect_clear():
+				_show_message("🏆 PERFECT CLEAR 🏆", Color(1.0, 0.85, 0.2), "完全防衛達成")
+				_play_celebration()
+			else:
+				_show_message("VICTORY!", Color(0.9, 0.9, 0.4))
 		_:
 			_message_container.visible = false
 
@@ -308,10 +318,24 @@ func _make_selected_stylebox() -> StyleBoxFlat:
 	sbf.set_corner_radius_all(8)
 	return sbf
 
-func _show_message(text: String, color: Color) -> void:
+func _show_message(text: String, color: Color, subtitle: String = "") -> void:
 	_message_label.text = text
 	_message_label.add_theme_color_override("font_color", color)
+	if subtitle != "":
+		_message_subtitle.text = subtitle
+		_message_subtitle.add_theme_color_override("font_color", color)
+		_message_subtitle.visible = true
+	else:
+		_message_subtitle.visible = false
 	_message_container.visible = true
+
+func _play_celebration() -> void:
+	await get_tree().process_frame
+	_message_label.pivot_offset = _message_label.size * 0.5
+	var tw := create_tween()
+	tw.set_loops()
+	tw.tween_property(_message_label, "scale", Vector2(1.08, 1.08), 0.6).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(_message_label, "scale", Vector2(1.0, 1.0), 0.6).set_trans(Tween.TRANS_SINE)
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
