@@ -10,3 +10,6 @@ export_presets.cfg.credentials
 
 # macOS
 .DS_Store
+
+# Claude Code local settings
+.claude/
