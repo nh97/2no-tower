@@ -46,12 +46,12 @@ func _build_hud() -> void:
 	top_bar.offset_left = 20
 	top_bar.offset_top = 16
 	top_bar.offset_right = -20
-	top_bar.offset_bottom = 56
+	top_bar.offset_bottom = 72
 	top_bar.add_theme_constant_override("separation", 40)
 	hud.add_child(top_bar)
 
-	_money_label = _make_label("Money: 0", 24)
-	_lives_label = _make_label("Lives: 0", 24)
+	_money_label = _make_label("Money: 0", 32)
+	_lives_label = _make_label("Lives: 0", 32)
 	top_bar.add_child(_money_label)
 	top_bar.add_child(_lives_label)
 
@@ -62,8 +62,8 @@ func _build_hud() -> void:
 
 	_speed_button = Button.new()
 	_speed_button.text = "▶▷▷ x1.0"
-	_speed_button.custom_minimum_size = Vector2(140, 40)
-	_speed_button.add_theme_font_size_override("font_size", 18)
+	_speed_button.custom_minimum_size = Vector2(180, 52)
+	_speed_button.add_theme_font_size_override("font_size", 24)
 	_speed_button.pressed.connect(func() -> void: GameManager.cycle_game_speed())
 	top_bar.add_child(_speed_button)
 
@@ -71,9 +71,9 @@ func _build_hud() -> void:
 	var bottom_bar := HBoxContainer.new()
 	bottom_bar.name = "TowerBar"
 	bottom_bar.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	bottom_bar.offset_left = -400
-	bottom_bar.offset_right = 400
-	bottom_bar.offset_top = -110
+	bottom_bar.offset_left = -480
+	bottom_bar.offset_right = 480
+	bottom_bar.offset_top = -130
 	bottom_bar.offset_bottom = -20
 	bottom_bar.add_theme_constant_override("separation", 16)
 	hud.add_child(bottom_bar)
@@ -96,19 +96,19 @@ func _build_hud() -> void:
 	msg_box.add_theme_constant_override("separation", 20)
 	_message_container.add_child(msg_box)
 
-	_message_label = _make_label("", 72)
+	_message_label = _make_label("", 96)
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	msg_box.add_child(_message_label)
 
-	_message_subtitle = _make_label("", 28)
+	_message_subtitle = _make_label("", 36)
 	_message_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_subtitle.visible = false
 	msg_box.add_child(_message_subtitle)
 
 	_restart_button = Button.new()
 	_restart_button.text = "リスタート"
-	_restart_button.custom_minimum_size = Vector2(180, 60)
-	_restart_button.add_theme_font_size_override("font_size", 22)
+	_restart_button.custom_minimum_size = Vector2(220, 72)
+	_restart_button.add_theme_font_size_override("font_size", 28)
 	_restart_button.pressed.connect(_on_restart_pressed)
 	msg_box.add_child(_restart_button)
 
@@ -120,8 +120,8 @@ func _build_boss_bar(parent: Control) -> void:
 	_boss_container = CenterContainer.new()
 	_boss_container.name = "BossBar"
 	_boss_container.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	_boss_container.offset_top = 60
-	_boss_container.offset_bottom = 110
+	_boss_container.offset_top = 80
+	_boss_container.offset_bottom = 140
 	_boss_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_boss_container.visible = false
 	parent.add_child(_boss_container)
@@ -131,12 +131,12 @@ func _build_boss_bar(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 4)
 	_boss_container.add_child(vbox)
 
-	_boss_label = _make_label("🐉 BOSS  0 / 0", 18)
+	_boss_label = _make_label("🐉 BOSS  0 / 0", 24)
 	_boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(_boss_label)
 
 	_boss_bar = ProgressBar.new()
-	_boss_bar.custom_minimum_size = Vector2(420, 18)
+	_boss_bar.custom_minimum_size = Vector2(480, 24)
 	_boss_bar.show_percentage = false
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = Color(0.9, 0.2, 0.2)
@@ -173,7 +173,7 @@ func _build_sell_popup(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 14)
 	panel.add_child(vbox)
 
-	var title := _make_label("オブジェクトを売却しますか?", 22)
+	var title := _make_label("オブジェクトを売却しますか?", 28)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
@@ -184,15 +184,15 @@ func _build_sell_popup(parent: Control) -> void:
 
 	_sell_confirm_btn = Button.new()
 	_sell_confirm_btn.text = "売却 +0G"
-	_sell_confirm_btn.custom_minimum_size = Vector2(150, 50)
-	_sell_confirm_btn.add_theme_font_size_override("font_size", 18)
+	_sell_confirm_btn.custom_minimum_size = Vector2(180, 60)
+	_sell_confirm_btn.add_theme_font_size_override("font_size", 24)
 	_sell_confirm_btn.pressed.connect(func() -> void: GameManager.confirm_sell())
 	hbox.add_child(_sell_confirm_btn)
 
 	var cancel_btn := Button.new()
 	cancel_btn.text = "キャンセル"
-	cancel_btn.custom_minimum_size = Vector2(120, 50)
-	cancel_btn.add_theme_font_size_override("font_size", 18)
+	cancel_btn.custom_minimum_size = Vector2(150, 60)
+	cancel_btn.add_theme_font_size_override("font_size", 24)
 	cancel_btn.pressed.connect(func() -> void: GameManager.cancel_sell())
 	hbox.add_child(cancel_btn)
 
@@ -221,7 +221,7 @@ func _build_difficulty_popup(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 18)
 	panel.add_child(vbox)
 
-	var title := _make_label("2no-tower", 36)
+	var title := _make_label("2no-tower", 44)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
@@ -229,11 +229,11 @@ func _build_difficulty_popup(parent: Control) -> void:
 		"・下部のボタン→黄色いマスをタップでオブジェクト配置 (G を消費)\n" + \
 		"・設置済みオブジェクトをタップで売却 (50% 返金)\n" + \
 		"・敵を倒すと G を獲得、ゴール到達で Life が減る (0 でゲームオーバー)"
-	var help := _make_label(help_text, 16)
+	var help := _make_label(help_text, 20)
 	help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(help)
 
-	var difficulty_label := _make_label("難易度を選択", 22)
+	var difficulty_label := _make_label("難易度を選択", 28)
 	difficulty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(difficulty_label)
 
@@ -246,8 +246,8 @@ func _build_difficulty_popup(parent: Control) -> void:
 		var cfg: Dictionary = GameManager.DIFFICULTY_CONFIG[d]
 		var btn := Button.new()
 		btn.text = "%s\nG %d  Life %d\n敵HP×%.1f" % [cfg.label, cfg.money, cfg.lives, cfg.hp_mult]
-		btn.custom_minimum_size = Vector2(170, 110)
-		btn.add_theme_font_size_override("font_size", 18)
+		btn.custom_minimum_size = Vector2(200, 130)
+		btn.add_theme_font_size_override("font_size", 24)
 		btn.pressed.connect(func() -> void: GameManager.start_game(d))
 		hbox.add_child(btn)
 
@@ -262,8 +262,8 @@ func _make_tower_button(kind: int) -> Button:
 	var cfg: Dictionary = Tower.CONFIG[kind]
 	var btn := Button.new()
 	btn.text = "%s\n%dG" % [cfg.label, cfg.cost]
-	btn.custom_minimum_size = Vector2(140, 80)
-	btn.add_theme_font_size_override("font_size", 20)
+	btn.custom_minimum_size = Vector2(170, 100)
+	btn.add_theme_font_size_override("font_size", 26)
 	btn.pressed.connect(func() -> void: GameManager.select_tower(kind))
 	return btn
 

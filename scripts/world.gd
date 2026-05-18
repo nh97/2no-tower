@@ -80,8 +80,8 @@ func _build_environment() -> void:
 func _build_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "Camera"
-	cam.position = Vector3(0, 22, 18)
-	cam.fov = 55
+	cam.position = Vector3(0, 19, 15)
+	cam.fov = 50
 	add_child(cam)
 	cam.look_at(Vector3(0, 0, -2), Vector3.UP)
 

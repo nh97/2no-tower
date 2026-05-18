@@ -1,7 +1,7 @@
 class_name PlacementSlot
 extends StaticBody3D
 
-const SLOT_RADIUS := 0.8
+const SLOT_RADIUS := 1.0
 const SLOT_HEIGHT := 0.06
 const NORMAL_ALBEDO := Color(0.9, 0.85, 0.3, 0.55)
 const NORMAL_EMISSION := Color(0.9, 0.85, 0.3)
