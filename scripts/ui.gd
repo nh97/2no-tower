@@ -223,6 +223,14 @@ func _build_difficulty_popup(parent: Control) -> void:
 	g_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(g_label)
 
+	var life_text := "【Life について】\n" + \
+		"・画面上部に残り Life を表示\n" + \
+		"・敵がゴールに到達すると Life が 1 減る\n" + \
+		"・Life が 0 になるとゲームオーバー"
+	var life_label := _make_label(life_text, 16)
+	life_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(life_label)
+
 	var difficulty_label := _make_label("難易度を選択", 22)
 	difficulty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(difficulty_label)
