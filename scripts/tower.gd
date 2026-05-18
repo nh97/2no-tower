@@ -199,6 +199,7 @@ func _try_fire() -> void:
 		return
 	var cfg: Dictionary = CONFIG[kind]
 	var proj := Projectile.new()
+	proj.kind = kind
 	proj.target = target
 	proj.damage = cfg.damage
 	proj.speed = cfg.projectile_speed
