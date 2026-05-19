@@ -2,12 +2,12 @@ extends Node3D
 
 const GROUND_SIZE := 40.0
 const PATH_POINTS: Array[Vector3] = [
-	Vector3(-18, 0.05, -10),
-	Vector3(-6, 0.05, -10),
-	Vector3(-6, 0.05, 6),
-	Vector3(8, 0.05, 6),
-	Vector3(8, 0.05, -6),
-	Vector3(18, 0.05, -6),
+	Vector3(-18, 0.05, -13),
+	Vector3(-6, 0.05, -13),
+	Vector3(-6, 0.05, 3),
+	Vector3(8, 0.05, 3),
+	Vector3(8, 0.05, -9),
+	Vector3(18, 0.05, -9),
 ]
 const WAVES: Array = [
 	[ [Enemy.Kind.BASIC, 6] ],
@@ -19,12 +19,12 @@ const WAVES: Array = [
 const SPAWN_INTERVAL := 1.0
 const WAVE_DELAY := 3.0
 const SLOT_POSITIONS: Array[Vector3] = [
-	Vector3(-12, 0, -7),
-	Vector3(-9, 0, 3),
-	Vector3(3, 0, 9),
-	Vector3(3, 0, 3),
-	Vector3(11, 0, -3),
-	Vector3(15, 0, -10),
+	Vector3(-12, 0, -10),
+	Vector3(-9, 0, 0),
+	Vector3(3, 0, 6),
+	Vector3(3, 0, 0),
+	Vector3(11, 0, -6),
+	Vector3(15, 0, -13),
 ]
 
 var _path: Path3D
@@ -80,10 +80,10 @@ func _build_environment() -> void:
 func _build_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "Camera"
-	cam.position = Vector3(0, 19, 15)
+	cam.position = Vector3(0, 22, 20)
 	cam.fov = 50
 	add_child(cam)
-	cam.look_at(Vector3(0, 0, -2), Vector3.UP)
+	cam.look_at(Vector3(0, 0, -4), Vector3.UP)
 
 func _build_ground() -> void:
 	var ground := StaticBody3D.new()

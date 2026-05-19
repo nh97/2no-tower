@@ -52,6 +52,8 @@ func _build_hud() -> void:
 
 	_money_label = _make_label("Money: 0", 32)
 	_lives_label = _make_label("Lives: 0", 32)
+	_money_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.15))
+	_lives_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.15))
 	top_bar.add_child(_money_label)
 	top_bar.add_child(_lives_label)
 
@@ -133,6 +135,7 @@ func _build_boss_bar(parent: Control) -> void:
 
 	_boss_label = _make_label("🐉 BOSS  0 / 0", 24)
 	_boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_boss_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.15))
 	vbox.add_child(_boss_label)
 
 	_boss_bar = ProgressBar.new()
