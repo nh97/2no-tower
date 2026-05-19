@@ -66,9 +66,9 @@ func _build_hud() -> void:
 	top_bar.add_child(spacer)
 
 	_mute_button = Button.new()
-	_mute_button.text = "🔊"
-	_mute_button.custom_minimum_size = Vector2(72, 52)
-	_mute_button.add_theme_font_size_override("font_size", 24)
+	_mute_button.text = "音声OFF"
+	_mute_button.custom_minimum_size = Vector2(130, 52)
+	_mute_button.add_theme_font_size_override("font_size", 22)
 	_mute_button.pressed.connect(func() -> void: AudioManager.toggle_mute())
 	top_bar.add_child(_mute_button)
 
@@ -389,4 +389,4 @@ func _on_game_speed_changed(value: float) -> void:
 	_speed_button.text = "%s x%.1f" % [icon, value]
 
 func _on_muted_changed(value: bool) -> void:
-	_mute_button.text = "🔇" if value else "🔊"
+	_mute_button.text = "音声ON" if value else "音声OFF"
