@@ -14,6 +14,7 @@ var _sell_container: CenterContainer
 var _sell_confirm_btn: Button
 var _difficulty_container: CenterContainer
 var _speed_button: Button
+var _mute_button: Button
 
 func _ready() -> void:
 	_build_hud()
@@ -26,11 +27,13 @@ func _ready() -> void:
 	GameManager.boss_hp_changed.connect(_on_boss_hp_changed)
 	GameManager.boss_defeated.connect(_on_boss_defeated)
 	GameManager.game_speed_changed.connect(_on_game_speed_changed)
+	AudioManager.muted_changed.connect(_on_muted_changed)
 	_on_money_changed(GameManager.money)
 	_on_lives_changed(GameManager.lives)
 	_on_state_changed(GameManager.state)
 	_on_selected_tower_changed(GameManager.selected_tower_kind)
 	_on_game_speed_changed(GameManager.game_speed)
+	_on_muted_changed(AudioManager.is_muted)
 
 func _build_hud() -> void:
 	var hud := Control.new()
@@ -61,6 +64,13 @@ func _build_hud() -> void:
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	top_bar.add_child(spacer)
+
+	_mute_button = Button.new()
+	_mute_button.text = "🔊"
+	_mute_button.custom_minimum_size = Vector2(72, 52)
+	_mute_button.add_theme_font_size_override("font_size", 24)
+	_mute_button.pressed.connect(func() -> void: AudioManager.toggle_mute())
+	top_bar.add_child(_mute_button)
 
 	_speed_button = Button.new()
 	_speed_button.text = "▶▷▷ x1.0"
@@ -377,3 +387,6 @@ func _on_game_speed_changed(value: float) -> void:
 	for i in GameManager.SPEED_OPTIONS.size():
 		icon += "▶" if i <= idx else "▷"
 	_speed_button.text = "%s x%.1f" % [icon, value]
+
+func _on_muted_changed(value: bool) -> void:
+	_mute_button.text = "🔇" if value else "🔊"

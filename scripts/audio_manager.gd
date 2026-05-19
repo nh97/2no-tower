@@ -26,11 +26,22 @@ var _sfx_streams: Dictionary = {}
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _next_player: int = 0
 var _bgm_player: AudioStreamPlayer
+var is_muted: bool = false
+
+signal muted_changed(value: bool)
 
 func _ready() -> void:
 	_build_sfx()
 	_build_players()
 	_try_play_bgm()
+
+func toggle_mute() -> void:
+	set_muted(not is_muted)
+
+func set_muted(value: bool) -> void:
+	is_muted = value
+	AudioServer.set_bus_mute(0, is_muted)
+	muted_changed.emit(is_muted)
 
 func play_sfx(kind: int) -> void:
 	var stream: AudioStream = _sfx_streams.get(kind)
