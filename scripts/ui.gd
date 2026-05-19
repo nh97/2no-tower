@@ -203,6 +203,7 @@ func _build_difficulty_popup(parent: Control) -> void:
 	_difficulty_container = CenterContainer.new()
 	_difficulty_container.name = "DifficultyPopup"
 	_difficulty_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_difficulty_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_difficulty_container.visible = false
 	parent.add_child(_difficulty_container)
 
@@ -251,7 +252,21 @@ func _build_difficulty_popup(parent: Control) -> void:
 		btn.text = "%s\nG %d  Life %d\n敵HP×%.1f" % [cfg.label, cfg.money, cfg.lives, cfg.hp_mult]
 		btn.custom_minimum_size = Vector2(200, 130)
 		btn.add_theme_font_size_override("font_size", 24)
-		btn.pressed.connect(func() -> void: GameManager.start_game(d))
+		var diff: int = d
+		btn.pressed.connect(func() -> void: GameManager.start_game(diff))
+		btn.gui_input.connect(func(event: InputEvent) -> void:
+			var pressed := false
+			if event is InputEventMouseButton:
+				var mb := event as InputEventMouseButton
+				if mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+					pressed = true
+			elif event is InputEventScreenTouch:
+				var st := event as InputEventScreenTouch
+				if st.pressed:
+					pressed = true
+			if pressed:
+				GameManager.start_game(diff)
+		)
 		hbox.add_child(btn)
 
 func _make_label(text: String, font_size: int) -> Label:

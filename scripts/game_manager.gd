@@ -55,6 +55,8 @@ func reset() -> void:
 	boss_defeated.emit()
 
 func start_game(difficulty: int) -> void:
+	if state != State.SELECTING_DIFFICULTY:
+		return
 	current_difficulty = difficulty
 	var cfg: Dictionary = DIFFICULTY_CONFIG[difficulty]
 	money = cfg.money
