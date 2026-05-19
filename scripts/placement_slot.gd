@@ -7,12 +7,15 @@ const NORMAL_ALBEDO := Color(0.9, 0.85, 0.3, 0.55)
 const NORMAL_EMISSION := Color(0.9, 0.85, 0.3)
 const FAIL_ALBEDO := Color(1.0, 0.3, 0.3, 0.75)
 const FAIL_EMISSION := Color(1.0, 0.3, 0.3)
+# touch のマウスエミュレーションで _on_input_event が同フレームに2回発火するのを抑止
+const INPUT_DEBOUNCE_MSEC := 200
 
 var occupied: bool = false
 var _tower: Tower
 var _disk: MeshInstance3D
 var _disk_mat: StandardMaterial3D
 var _flash_tween: Tween
+var _last_input_msec: int = 0
 
 func _ready() -> void:
 	_build_visual()
@@ -53,6 +56,10 @@ func _on_input_event(_camera: Node, event: InputEvent, _pos: Vector3, _normal: V
 			triggered = true
 	if not triggered:
 		return
+	var now: int = Time.get_ticks_msec()
+	if now - _last_input_msec < INPUT_DEBOUNCE_MSEC:
+		return
+	_last_input_msec = now
 	if occupied:
 		GameManager.request_sell(self)
 	else:
