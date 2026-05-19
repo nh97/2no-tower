@@ -99,6 +99,7 @@ func _build_hud() -> void:
 	_message_container = CenterContainer.new()
 	_message_container.name = "MessageContainer"
 	_message_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_message_container.offset_bottom = -260
 	_message_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_message_container.visible = false
 	hud.add_child(_message_container)
@@ -111,13 +112,13 @@ func _build_hud() -> void:
 	_message_label = _make_label("", 96)
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_label.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	_message_label.add_theme_constant_override("outline_size", 8)
+	_message_label.add_theme_constant_override("outline_size", 4)
 	msg_box.add_child(_message_label)
 
-	_message_subtitle = _make_label("", 36)
+	_message_subtitle = _make_label("", 56)
 	_message_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_subtitle.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	_message_subtitle.add_theme_constant_override("outline_size", 5)
+	_message_subtitle.add_theme_constant_override("outline_size", 3)
 	_message_subtitle.visible = false
 	msg_box.add_child(_message_subtitle)
 
@@ -137,7 +138,7 @@ func _build_boss_bar(parent: Control) -> void:
 	_boss_container.name = "BossBar"
 	_boss_container.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	_boss_container.offset_top = 80
-	_boss_container.offset_bottom = 180
+	_boss_container.offset_bottom = 160
 	_boss_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_boss_container.visible = false
 	parent.add_child(_boss_container)
@@ -147,13 +148,13 @@ func _build_boss_bar(parent: Control) -> void:
 	vbox.add_theme_constant_override("separation", 4)
 	_boss_container.add_child(vbox)
 
-	_boss_label = _make_label("🐉 BOSS  0 / 0", 36)
+	_boss_label = _make_label("🐉 BOSS  0 / 0", 30)
 	_boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_boss_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.15))
 	vbox.add_child(_boss_label)
 
 	_boss_bar = ProgressBar.new()
-	_boss_bar.custom_minimum_size = Vector2(540, 32)
+	_boss_bar.custom_minimum_size = Vector2(510, 28)
 	_boss_bar.show_percentage = false
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = Color(0.9, 0.2, 0.2)
